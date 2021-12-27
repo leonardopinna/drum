@@ -104,9 +104,7 @@ function pressKeyAndMakeSound(event) {
 
 
 function buttonAnimation(currentKey) {
-  console.log(currentKey);
   var activeButton = document.querySelector("."+currentKey);
-  console.log(activeButton);
   activeButton.classList.add("pressed");
   setTimeout(function () {activeButton.classList.remove("pressed")},100);
 }
