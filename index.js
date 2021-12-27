@@ -3,13 +3,17 @@ var audioList = ["crash", "kick-bass", "snare", "tom-1", "tom-2", "tom-3", "tom-
 
 
 for (var i = 0; i < drumButtons.length; i++) {
-  drumButtons[i].addEventListener('click', function() {
+  drumButtons[i].addEventListener('click', soundOnClick)
+}
 
+  function soundOnClick() {
 
     var buttonInnerHTML = this.textContent
 
+    buttonAnimation(buttonInnerHTML)
+
     switch (buttonInnerHTML) {
-      case "w": // case "w":
+      case "w":
         var tom1 = new Audio('sounds/tom-1.mp3');
         tom1.play();
         break;
@@ -48,13 +52,15 @@ for (var i = 0; i < drumButtons.length; i++) {
 
     }
 
-  })
-};
+  };
 
-document.addEventListener("keydown", function(e) {
+document.addEventListener("keydown", pressKeyAndMakeSound);
 
 
-  switch (e.key) {
+function pressKeyAndMakeSound(event) {
+
+  buttonAnimation(event.key);
+  switch (event.key) {
     case "w":
       var tom1 = new Audio('sounds/tom-1.mp3');
       tom1.play();
@@ -94,4 +100,13 @@ document.addEventListener("keydown", function(e) {
 
   }
 
-})
+}
+
+
+function buttonAnimation(currentKey) {
+  console.log(currentKey);
+  var activeButton = document.querySelector("."+currentKey);
+  console.log(activeButton);
+  activeButton.classList.add("pressed");
+  setTimeout(function () {activeButton.classList.remove("pressed")},100);
+}
